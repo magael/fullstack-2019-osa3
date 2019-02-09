@@ -24,12 +24,23 @@ let persons = [
   }
 ];
 
-app.get("/api", (req, res) => {
-  res.send("<h1>Hello World!</h1>");
-});
+const generateId = () => {
+  const maxId = persons.length > 0 ? Math.max(...persons.map(n => n.id)) : 0;
+  return maxId + 1;
+};
 
 app.get("/api/persons", (req, res) => {
   res.json(persons);
+});
+
+app.get("/api/persons/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const person = persons.find(p => p.id === id);
+  if (person) {
+    res.json(person);
+  } else {
+    res.status(404).end();
+  }
 });
 
 app.get("/info", (req, res) => {

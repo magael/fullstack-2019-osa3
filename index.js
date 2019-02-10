@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
-const bodyParser = require('body-parser')
+const bodyParser = require("body-parser");
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 let persons = [
   {
@@ -60,10 +60,18 @@ app.delete("/api/persons/:id", (req, res) => {
 
 app.post("/api/persons", (req, res) => {
   const body = req.body;
+  const { name, number } = body;
 
-  if (body.name === undefined) {
+  if (name === undefined || number === undefined || name < 1 || number < 1) {
     return res.status(400).json({
       error: "content missing"
+    });
+  }
+
+  const names = persons.map(person => person.name);
+  if (names.includes(body.name)) {
+    return res.status(400).json({
+      error: "name must be unique"
     });
   }
 

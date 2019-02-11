@@ -1,7 +1,15 @@
-POST http://localhost:3001/api/persons
+POST http://aqueous-escarpment.herokuapp.com/api/persons
 Content-Type:  application/json
 
 {
-  "name": "Lea Kutvonen",
+  "name": "UUS",
   "number": "040-123456"
 }
+
+# POST http://localhost:3001/api/persons
+# Content-Type:  application/json
+
+# {
+#   "name": "Lea Kutvonen",
+#   "number": "040-123456"
+# }

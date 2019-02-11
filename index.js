@@ -2,7 +2,9 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const cors = require('cors')
 
+app.use(cors())
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
 
@@ -62,6 +64,7 @@ app.delete("/api/persons/:id", (req, res) => {
 
 app.post("/api/persons", (req, res) => {
   const body = req.body;
+  console.log(body);
   const { name, number } = body;
 
   if (name === undefined || number === undefined || name < 1 || number < 1) {
